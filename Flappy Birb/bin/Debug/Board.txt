@@ -1,0 +1,18 @@
+12
+0,1,Kallum,7
+1,2,Hell9o,0
+2,4,Kiioowed,3
+3,2,Kallum,1
+4,35,Kiajldnfad,14
+5,0,Henlo,-1
+6,0,No Name,5
+7,0,No Name,6
+8,38,Meme,4
+9,29,Kallum,13
+10,14,Kallum,2
+11,46,meme,16
+12,52,Pepe,15
+13,16,memememe,10
+14,29,Meme,9
+15,48,Pussy Boi,11
+16,40,Memeboausdfakd,8
