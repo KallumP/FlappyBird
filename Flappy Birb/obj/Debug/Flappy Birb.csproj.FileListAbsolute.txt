@@ -205,3 +205,18 @@ H:\My Documents\Development\Flappy Birb\Flappy Birb\obj\Debug\Flappy Birb.exe.ma
 H:\My Documents\Development\Flappy Birb\Flappy Birb\obj\Debug\Flappy Birb.application
 H:\My Documents\Development\Flappy Birb\Flappy Birb\obj\Debug\Flappy Birb.exe
 H:\My Documents\Development\Flappy Birb\Flappy Birb\obj\Debug\Flappy Birb.pdb
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\bin\Debug\Flappy Birb.exe.config
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\bin\Debug\Flappy Birb.exe.manifest
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\bin\Debug\Flappy Birb.application
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\bin\Debug\Flappy Birb.exe
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\bin\Debug\Flappy Birb.pdb
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.csprojAssemblyReference.cache
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy_Birb.Form1.resources
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy_Birb.Properties.Resources.resources
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.csproj.GenerateResource.cache
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.TrustInfo.xml
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.exe.manifest
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.application
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.exe
+C:\Users\User\Documents\Coding\FlappyBird\FlappyBird\Flappy Birb\obj\Debug\Flappy Birb.pdb
