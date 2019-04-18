@@ -431,7 +431,7 @@ namespace Flappy_Birb
 
         public void saveLeaderBoard()
         {
-            StreamWriter sw = new StreamWriter("Board.txt");
+            StreamWriter sw = new StreamWriter(Application.StartupPath + "\\Board.txt");
 
             sw.WriteLine(startPointer);
             //has the first line as the start pointer
@@ -449,7 +449,7 @@ namespace Flappy_Birb
 
         public void loadLeaderBoard()
         {
-            StreamReader sr = new StreamReader("Board.txt");
+            StreamReader sr = new StreamReader(Application.StartupPath + "\\Board.txt");
             string line;
             string[] newVariables = new string[3];
 
