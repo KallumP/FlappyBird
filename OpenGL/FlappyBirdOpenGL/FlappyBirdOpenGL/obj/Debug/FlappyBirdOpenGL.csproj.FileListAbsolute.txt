@@ -1,0 +1,14 @@
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\FlappyBirdOpenGL.exe.config
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\FlappyBirdOpenGL.exe
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\FlappyBirdOpenGL.pdb
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\OpenTK.dll
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\OpenTK.pdb
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\OpenTK.xml
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.csprojAssemblyReference.cache
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.Form1.resources
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.Properties.Resources.resources
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.csproj.GenerateResource.cache
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.csproj.CoreCompileInputs.cache
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.csproj.CopyComplete
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.exe
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.pdb
