@@ -11,98 +11,36 @@ using OpenTK.Graphics.OpenGL;
 
 namespace FlappyBirdOpenGL {
     class Game {
-        public GameWindow window;
-        Bird player;
+
+        public Bird player;
         PipeSpawner spawner;
         public List<Pipe> pipes;
-        Form1 parent;
-        int targetFPS = 60;
+        public Form1 parent { get; set; }
+        public int frameRate { get; set; }
+
+        public Point dimensions { get; set; }
+
+        public bool started { get; set; } = false;
+
 
         /// <summary>
         /// constructor
         /// </summary>
-        public Game(Form1 _parent) {
+        public Game(Form1 _parent, int _frameRate, Point _dim) {
             parent = _parent;
-            window = new GameWindow(400, 600);
-            StartGame();
-            OpenGame();
-        }
-
-        /// <summary>
-        /// Opens the window
-        /// </summary>
-        void OpenGame() {
-
-            window.Load += Load;
-            window.Resize += Resize;
-            window.RenderFrame += Render;
-            window.KeyPress += KeyPressed;
-
-            //makes the window refress every 60th of a second
-            window.Run(1 / targetFPS);
-        }
-
-        /// <summary>
-        /// Method that happens when the game loads
-        /// </summary>
-        /// <param name="o"></param>
-        /// <param name="e"></param>
-        void Load(object o, EventArgs e) {
-            GL.ClearColor(0, 0, 0, 0);
-
-        }
-
-        /// <summary>
-        /// Deals with resizing the window
-        /// </summary>
-        /// <param name="o"></param>
-        /// <param name="e"></param>
-        void Resize(object o, EventArgs e) {
-            GL.Viewport(0, 0, window.Width, window.Height);
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();
-            GL.Ortho(0, window.Width, window.Height, 0, -1, 1);
-            GL.MatrixMode(MatrixMode.Modelview);
-        }
-
-        /// <summary>
-        /// Renders each frame
-        /// </summary>
-        /// <param name="o"></param>
-        /// <param name="e"></param>
-        void Render(object o, EventArgs e) {
-
-            Tick();
-
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-
-            player.Draw();
-
-            foreach (Pipe p in pipes)
-                p.Draw();
-
-
-            window.SwapBuffers();
-        }
-
-        /// <summary>
-        /// Deals with when keys are pressed
-        /// </summary>
-        /// <param name="o"></param>
-        /// <param name="e"></param>
-        void KeyPressed(object o, KeyPressEventArgs e) {
-            if (e.KeyChar == 'w') {
-                player.Flap();
-            }
+            frameRate = _frameRate;
+            dimensions = _dim;
         }
 
         /// <summary>
         /// Starts and sets up the game environment
         /// </summary>
-        void StartGame() {
+        public void StartGame() {
+
+            started = true;
 
             //sets up the player to start in the middle of the screen, closer to the left
-            player = new Bird(new PointF(window.Width / 5, window.Height / 2), this);
+            player = new Bird(new PointF(dimensions.X / 5, dimensions.Y / 2), this);
             pipes = new List<Pipe>();
             spawner = new PipeSpawner(this);
 
@@ -111,7 +49,7 @@ namespace FlappyBirdOpenGL {
         /// <summary>
         /// Deals with what needs to happen each tick of the game
         /// </summary>
-        void Tick() {
+        public void Tick() {
 
             MakeGameHarder();
             CheckToRemovePipes();
@@ -133,10 +71,7 @@ namespace FlappyBirdOpenGL {
             //makes the game faster
             Pipe.speed += 0.003f;
 
-
-            //calculates how many frames it should take the pipe to leave the screen, 
-            //then multiplies that by the time per frame to get the time taken for a pipe to leave the screen
-            PipeSpawner.spawnRate = (window.Width / Pipe.speed) * (float)window.UpdatePeriod * 1000;
+            spawner.CalculateSpawnRate();
         }
 
         /// <summary>
@@ -165,14 +100,10 @@ namespace FlappyBirdOpenGL {
                     //checks to see if the player is within the gamp of the pipes
                     if (player.coords.Y - player.radius > p.coords.Y && player.coords.Y + player.radius < p.coords.Y + p.gap) {
 
-                        //the player's color turns yellow if no collision
-                        player.color = Color.Yellow;
-
                         //adds the score to the player, if this is their first time passing the pipe
                         if (p.scoreTaken == false) {
-
-                            player.score++;
                             p.scoreTaken = true;
+                            parent.UpdateScore(player.score++);
                         }
 
                     } else {
@@ -181,10 +112,6 @@ namespace FlappyBirdOpenGL {
                         EndGame();
                     }
 
-                } else {
-
-                    //the player's color turns yellow if they haven't reached a pipe yet
-                    player.color = Color.Yellow;
                 }
             }
         }
@@ -194,18 +121,8 @@ namespace FlappyBirdOpenGL {
         /// </summary>
         void EndGame() {
 
+            started = false;
             parent.EndGame(player.score);
-
-            window.Close();
-
-            
         }
     }
 }
-
-
-/* still to do
- * 
- * 
- * scoring system
- */

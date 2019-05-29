@@ -18,7 +18,7 @@ namespace FlappyBirdOpenGL {
         /// <summary>
         /// This variable is the same over all the pipes
         /// </summary>
-        public static float speed = 4;
+        public static float speed = 6;
 
         /// <summary>
         /// Constructor
@@ -28,7 +28,7 @@ namespace FlappyBirdOpenGL {
             parent = _parent;
 
             color = Color.Green;
-            coords = new PointF(parent.window.Width, NewHeight());
+            coords = new PointF(parent.dimensions.X, NewHeight());
             width = 60;
             gap = 150;
         }
@@ -39,7 +39,7 @@ namespace FlappyBirdOpenGL {
         /// <returns></returns>
         float NewHeight() {
 
-            float height = rnd.Next(parent.window.Height / 10, parent.window.Height - (parent.window.Height / 3) - gap);
+            float height = rnd.Next(parent.dimensions.Y / 10, parent.dimensions.Y - (parent.dimensions.Y / 3) - gap);
 
             return height;
         }
@@ -73,8 +73,8 @@ namespace FlappyBirdOpenGL {
 
             GL.Vertex2(coords.X, coords.Y + gap);
             GL.Vertex2(coords.X + width, coords.Y + gap);
-            GL.Vertex2(coords.X + width, parent.window.Height);
-            GL.Vertex2(coords.X, parent.window.Height);
+            GL.Vertex2(coords.X + width, parent.parent.Height);
+            GL.Vertex2(coords.X, parent.parent.Height);
 
 
             GL.End();

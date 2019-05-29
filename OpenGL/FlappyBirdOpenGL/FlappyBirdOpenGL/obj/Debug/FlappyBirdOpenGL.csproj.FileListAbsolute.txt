@@ -12,3 +12,6 @@ D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\
 D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.csproj.CopyComplete
 D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.exe
 D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\obj\Debug\FlappyBirdOpenGL.pdb
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\OpenTK.GLControl.dll
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\OpenTK.GLControl.pdb
+D:\Documents\Code\FlappyBird\OpenGL\FlappyBirdOpenGL\FlappyBirdOpenGL\bin\Debug\OpenTK.GLControl.xml

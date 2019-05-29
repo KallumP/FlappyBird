@@ -18,7 +18,7 @@ namespace FlappyBirdOpenGL {
         public static float spawnRate;
 
         /// <summary>
-        /// A counter to keep track of how long it has been since the last spawn (holds seconds)
+        /// A counter to keep track of how long it has been since the last spawn (holds ms)
         /// </summary>
         float spawnCounter;
 
@@ -27,7 +27,18 @@ namespace FlappyBirdOpenGL {
         /// </summary>
         public PipeSpawner(Game _parent) {
             parent = _parent;
-            spawnRate = (parent.window.Width / Pipe.speed) * (float)parent.window.UpdatePeriod * 1000;
+
+            CalculateSpawnRate();
+        }
+        
+        /// <summary>
+        /// Calculates the new spawnrate of the spawner
+        /// </summary>
+        public void CalculateSpawnRate() {
+
+            //calculates the spawnrate by seeing how many frames it should take for a pipe to move through the screen
+            //and then calculating how many miliseconds that shouuld take
+            spawnRate = (parent.parent.Width / Pipe.speed) * (1000 / (float)parent.frameRate);
         }
 
         /// <summary>
@@ -35,8 +46,8 @@ namespace FlappyBirdOpenGL {
         /// </summary>
         public void Tick() {
 
-            //adds the time passes since the last tick
-            spawnCounter += (float)parent.window.UpdatePeriod * 1000;
+            //adds the time passed since the last tick (ms)
+            spawnCounter += 1000 / (float)parent.frameRate;
 
             CheckToSpawn();
         }

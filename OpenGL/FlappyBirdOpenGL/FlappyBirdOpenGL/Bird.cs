@@ -15,18 +15,20 @@ namespace FlappyBirdOpenGL {
         /// An instance to the Game class
         /// </summary>
         Game parent;
-        public Color color;
-        public int score;
+
+        Color color;
+
+        public int score { get; set; }
 
         /// <summary>
         /// the gravity to be applied to the bird (px per second per second)
         /// </summary>
-        float gravity = 0.01f;
+        float gravity = 1f;
 
         /// <summary>
         /// the accelaration provided by a flap to the bird(px per second per second)
         /// </summary>
-        float flapVel = -7.5f;
+        float flapVel = -10f;
 
         /// <summary>
         /// The overal velocity of the bird
@@ -56,7 +58,7 @@ namespace FlappyBirdOpenGL {
         public Bird(PointF startingCoords, Game _parent) {
             coords = startingCoords;
             parent = _parent;
-            termVel = 10 / (float)parent.window.UpdateFrequency;
+            termVel = 10;
             color = Color.Yellow;
         }
 
@@ -64,7 +66,7 @@ namespace FlappyBirdOpenGL {
         /// The method that updates the bird every tick
         /// </summary>
         public void Tick() {
-            vel += gravity * (float)parent.window.UpdateFrequency;
+            vel += gravity;
             CheckForBounds();
             Move();
         }
@@ -82,8 +84,8 @@ namespace FlappyBirdOpenGL {
         void CheckForBounds() {
 
             //stops the bird from going outside the window
-            if (coords.Y + radius > parent.window.Height)
-                coords.Y = parent.window.Height - radius;
+            if (coords.Y + radius > parent.dimensions.Y)
+                coords.Y = parent.dimensions.Y - radius;
 
             else if (coords.Y - radius < 0)
                 coords.Y = radius;
