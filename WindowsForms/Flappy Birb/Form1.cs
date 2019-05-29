@@ -9,10 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Flappy_Birb
-{
-    public partial class Form1 : Form
-    {
+using OpenTK;
+using OpenTK.Graphics;
+using OpenTK.Graphics.OpenGL;
+
+
+namespace Flappy_Birb {
+    public partial class Form1 : Form {
+        bool glControlLoaded = false;
         int gravity = 1;
         List<Pipe> pipes = new List<Pipe>();
         List<Leaderboard> board = new List<Leaderboard>();
@@ -38,8 +42,7 @@ namespace Flappy_Birb
         int pipeGap = 160;
         int distanceBetwenPipes = 240;
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
+        private void timer1_Tick(object sender, EventArgs e) {
             if (clickedToStart == true)
             //stops the game from starting right after hitting restart
             {
@@ -56,6 +59,8 @@ namespace Flappy_Birb
                 pictureBox1.Invalidate();
                 //causes the game screen to refresh
 
+                GLControl_canvas.Invalidate();
+
                 pipeCollsion();
                 //after everything is done, it will check for a collision
 
@@ -67,16 +72,15 @@ namespace Flappy_Birb
         }
         //game loop
 
-        public Form1()
-        {
+        public Form1() {
             InitializeComponent();
         }
         //dunno what this is
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
+        private void Form1_Load(object sender, EventArgs e) {
             loadLeaderBoard();
             outputScore();
+
 
             maxSpawnMargin = (gameHeight - pipeGap) / 2;
 
@@ -89,12 +93,15 @@ namespace Flappy_Birb
         }
         //loads the form
 
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Up)
-            {
-                if (clickedToStart == false)
-                {
+        private void GLControl_canvas_Load(object sender, EventArgs e) {
+            GL.ClearColor(Color.Black);
+            glControlLoaded = true;
+        }
+        //loads up the gl control
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Space || e.KeyCode == Keys.Up) {
+                if (clickedToStart == false) {
                     clickToStart_lbl.Visible = false;
                     clickedToStart = true;
                     //checks to see if the user is clicking to start the game
@@ -104,28 +111,25 @@ namespace Flappy_Birb
             }
             //takes in a jump input
 
-            else if (e.KeyCode == Keys.Escape)
-            {
-                this.Close();
+            else if (e.KeyCode == Keys.Escape) {
+                Close();
             }
             //takes in an input to close the program
         }
         //detect when the user presses a key to jump
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawEllipse(Pens.Blue, playerOne.coords.x, playerOne.coords.y, playerOne.size.x, playerOne.size.y);
+        private void pictureBox1_Paint(object sender, PaintEventArgs e) {
+            e.Graphics.DrawEllipse(Pens.Blue, playerOne.coords.X, playerOne.coords.Y, playerOne.size.X, playerOne.size.Y);
 
-            // e.Graphics.DrawImage(Image.FromFile("Bird.png"), playerOne.coords.x, playerOne.coords.y, playerOne.size.x, playerOne.size.y);
+            // e.Graphics.DrawImage(Image.FromFile("Bird.png"), playerOne.coords.X, playerOne.coords.Y, playerOne.size.X, playerOne.size.Y);
             //draws out the character 
 
-            foreach (Pipe p in pipes)
-            {
-                e.Graphics.DrawRectangle(Pens.Red, p.coords.x, 0, pipeWidth, p.coords.y);
-                e.Graphics.DrawRectangle(Pens.Red, p.coords.x, p.coords.y + pipeGap, pipeWidth, gameHeight);
+            foreach (Pipe p in pipes) {
+                e.Graphics.DrawRectangle(Pens.Red, p.coords.X, 0, pipeWidth, p.coords.Y);
+                e.Graphics.DrawRectangle(Pens.Red, p.coords.X, p.coords.Y + pipeGap, pipeWidth, gameHeight);
 
-                //e.Graphics.DrawImage(Image.FromFile("PipeBase.png"), p.coords.x, 0, pipeWidth, p.coords.y);
-                //e.Graphics.DrawImage(Image.FromFile("PipeBase.png"), p.coords.x, p.coords.y + pipeGap, pipeWidth, gameHeight);
+                //e.Graphics.DrawImage(Image.FromFile("PipeBase.png"), p.coords.X, 0, pipeWidth, p.coords.Y);
+                //e.Graphics.DrawImage(Image.FromFile("PipeBase.png"), p.coords.X, p.coords.Y + pipeGap, pipeWidth, gameHeight);
 
                 //draws the not safe zone
             }
@@ -133,10 +137,61 @@ namespace Flappy_Birb
         }
         //draws the game
 
-        public void checkSpawnPipe()
-        {
-            if (ticksToSpawnPipe > spawnRate)
-            {
+        private void GLControl_canvas_Paint(object sender, PaintEventArgs e) {
+
+            GL.Clear(ClearBufferMask.ColorBufferBit);
+            GL.Clear(ClearBufferMask.DepthBufferBit);
+
+            GL.Viewport(0, 0, GLControl_canvas.Width, GLControl_canvas.Height);
+            GL.MatrixMode(MatrixMode.Projection);
+            GL.LoadIdentity();
+            GL.Ortho(0, GLControl_canvas.Width, GLControl_canvas.Height, 0, -1, 1);
+            GL.MatrixMode(MatrixMode.Modelview);
+
+            //Basic Setup for viewing
+          
+
+            if (glControlLoaded != false) {
+                //makes sure that the glcontrol is there before drawing to it
+
+                GL.Begin(BeginMode.Polygon);
+
+                //loops through and draws out a cirle to represent the player
+                for (int i = 0; i <= 360; i += 20) {
+
+                    double X = playerOne.radius + playerOne.coords.X + Math.Sin(i / 57.2) * playerOne.radius;
+                    double Y = playerOne.radius + playerOne.coords.Y + Math.Cos(i / 57.2) * playerOne.radius;
+
+                    GL.Color3(Color.Yellow);
+                    GL.Vertex2(X, Y);
+                }
+
+                GL.End();
+
+                foreach (Pipe p in pipes) {
+                    GL.Begin(BeginMode.Polygon);
+                    GL.Color3(Color.Green);
+                    GL.Vertex2(p.coords.X, 0);
+                    GL.Vertex2(p.coords.X + pipeWidth, 0);
+                    GL.Vertex2(p.coords.X + pipeWidth, p.coords.Y);
+                    GL.Vertex2(p.coords.X, p.coords.Y);
+                    GL.End();
+
+                    GL.Begin(BeginMode.Polygon);
+                    GL.Vertex2(p.coords.X, p.coords.Y + pipeGap);
+                    GL.Vertex2(p.coords.X + pipeWidth, p.coords.Y + pipeGap);
+                    GL.Vertex2(p.coords.X + pipeWidth, GLControl_canvas.Height);
+                    GL.Vertex2(p.coords.X, GLControl_canvas.Height);
+                    GL.End();
+                }
+
+                GLControl_canvas.SwapBuffers();
+            }
+        }
+        //draws the game using opengl
+
+        public void checkSpawnPipe() {
+            if (ticksToSpawnPipe > spawnRate) {
                 spawnPipe();
                 ticksToSpawnPipe = 0;
             }
@@ -147,35 +202,30 @@ namespace Flappy_Birb
         }
         //checks to see if a pipe needs to be spawned
 
-        public void spawnPipe()
-        {
+        public void spawnPipe() {
             int yOfPipe = rnd.Next(spawnMargin, gameHeight - pipeGap - spawnMargin);
 
             pipes.Add(new Pipe(gameWidth, yOfPipe));
-            //calculates the random y coordinate of the pipe and spawns it in
+            //calculates the random Y coordinate of the pipe and spawns it in
         }
         //spawns in a pipe
 
-        public void pipeCollsion()
-        {
+        public void pipeCollsion() {
             foreach (Pipe p in pipes)
             //loops through all of the pipes in the game
             {
-                if (playerOne.coords.x + playerOne.size.x > p.coords.x &&
-                playerOne.coords.x < p.coords.x + pipeWidth)
+                if (playerOne.coords.X + playerOne.size.X > p.coords.X &&
+                playerOne.coords.X < p.coords.X + pipeWidth)
                 //checks to see if the player is in the pipe's width
                 {
-                    if (playerOne.coords.y < p.coords.y ||
-                    playerOne.coords.y + playerOne.size.y > p.coords.y + pipeGap)
+                    if (playerOne.coords.Y < p.coords.Y ||
+                    playerOne.coords.Y + playerOne.size.Y > p.coords.Y + pipeGap)
                     //checks to see if the player was outside the safe gap of the pipes
                     {
                         gameOver();
                         //if there was a collision, then it game overs
-                    }
-                    else
-                    {
-                        if (p.checkPassed() == false)
-                        {
+                    } else {
+                        if (p.checkPassed() == false) {
                             playerOne.addScore(p.returnScore());
                             makeHarder();
                         }
@@ -185,8 +235,7 @@ namespace Flappy_Birb
         }
         //checks to see if there is a collsion with the pipes
 
-        public void gameOver()
-        {
+        public void gameOver() {
             gameLoop.Stop();
             //ends the game if the player hits a pipe
 
@@ -215,8 +264,7 @@ namespace Flappy_Birb
         }
         //does the game over stuff
 
-        public void gameStart()
-        {
+        public void gameStart() {
             pipes.Clear();
             //removes all elements from the pipes list
 
@@ -224,8 +272,8 @@ namespace Flappy_Birb
             gameWidth = pictureBox1.Width;
             //sets the height and width of the picture box
 
-            playerOne.coords.y = gameHeight / 2;
-            playerOne.coords.x = gameWidth / 10;
+            playerOne.coords.Y = gameHeight / 2;
+            playerOne.coords.X = gameWidth / 10;
             //sets the players coordinates back to the start
 
             spawnPipe();
@@ -271,8 +319,7 @@ namespace Flappy_Birb
         }
         //starts the game up
 
-        public void removePipes()
-        {
+        public void removePipes() {
             if (pipes.Count < 0)
             //if there are any pipes
             {
@@ -280,7 +327,7 @@ namespace Flappy_Birb
                 //creates a new instance of the pipe class identical to the first pipe in the list of pipes
 
                 if (p.offScreen(pipeWidth) == true)
-                //checks to see if the pipe's x coordinate is smaller than 0
+                //checks to see if the pipe's X coordinate is smaller than 0
                 {
                     pipes.RemoveAt(0);
                     //removes the first pipe in the list
@@ -290,15 +337,14 @@ namespace Flappy_Birb
         }
         //checks to see if the pipes are off screen and then removes them
 
-        private void restart_btn_Click(object sender, EventArgs e)
-        {
+        private void restart_btn_Click(object sender, EventArgs e) {
             gameStart();
             pictureBox1.Invalidate();
+            GLControl_canvas.Invalidate();
         }
         //resets the game
 
-        private void addToLead_btn_Click(object sender, EventArgs e)
-        {
+        private void addToLead_btn_Click(object sender, EventArgs e) {
             enteredName = name_tBox.Text;
             if (enteredName == "")
                 enteredName = "No Name";
@@ -311,34 +357,28 @@ namespace Flappy_Birb
         }
         //adds the current score to the leadboard class
 
-        public void addScore(int newScore)
-        {
+        public void addScore(int newScore) {
             board.Add(new Leaderboard(newScore, enteredName));
             //adds the new number to the list
         }
         //adds the score to the leaderboard class
 
-        public void sortScore()
-        {
+        public void sortScore() {
             int size = board.Count();
             //gets the size of the list after adding the new one in
 
-            if (size == 1)
-            {
+            if (size == 1) {
                 board[0].changePointer(-1);
                 //if there wasn't anything in the list already, then the pointer is set to -1
                 //means that the value being added is the first in the list, so no sorting is needed
-            }
-            else
-            {
+            } else {
                 int currentPointer = startPointer;
                 int prevPointer = startPointer;
                 int newIndex = size - 1;
                 //variables used in the sorting algorithm
 
                 bool exit = false;
-                do
-                {
+                do {
                     if (board[currentPointer].returnScore() > board[newIndex].returnScore())
                     //if the current value is smaller than the new value, then we need to compare the next value
                     {
@@ -353,19 +393,16 @@ namespace Flappy_Birb
 
                             exit = true;
                             //makes the sorting stop after putting the value at the end
-                        }
-                        else
-                        {
+                        } else {
                             prevPointer = currentPointer;
                             //saves the previous pointer
 
                             currentPointer = board[currentPointer].returnPointer();
                             //updates the current pointer to point to the next value in the list.
                         }
-                    }
-                    else if (board[currentPointer].returnScore() <= board[newIndex].returnScore())
-                    //if the current index's value is bigger than the new value then we need to put the new value here
-                    {
+                    } else if (board[currentPointer].returnScore() <= board[newIndex].returnScore())
+                      //if the current index's value is bigger than the new value then we need to put the new value here
+                      {
                         if (currentPointer == startPointer)
                         //if the new value was smaller than the first value in the list
                         {
@@ -374,10 +411,9 @@ namespace Flappy_Birb
 
                             board[newIndex].changePointer(currentPointer);
                             //the new value points to the value that it was smaller than
-                        }
-                        else
-                        //if the current value is larger or equal to the new value, the new value belongs before the current value
-                        {
+                        } else
+                          //if the current value is larger or equal to the new value, the new value belongs before the current value
+                          {
                             board[prevPointer].changePointer(newIndex);
                             //previous value points to the new value
 
@@ -394,8 +430,7 @@ namespace Flappy_Birb
         }
         //sorts the newly added score
 
-        public void outputScore()
-        {
+        public void outputScore() {
             leaderBoard_lBox.Items.Clear();
 
             bool exitter = false;
@@ -404,8 +439,7 @@ namespace Flappy_Birb
             int sortPointer = startPointer;
             //makes a pointer variable to keep track of where in the leaderboard we are
 
-            do
-            {
+            do {
                 int value;
                 //a temporary container to hold the current value
 
@@ -429,15 +463,13 @@ namespace Flappy_Birb
         }
         //outputs the score to the listbox
 
-        public void saveLeaderBoard()
-        {
+        public void saveLeaderBoard() {
             StreamWriter sw = new StreamWriter(Application.StartupPath + "\\Board.txt");
 
             sw.WriteLine(startPointer);
             //has the first line as the start pointer
 
-            for (int i = 0; i < board.Count(); i++)
-            {
+            for (int i = 0; i < board.Count(); i++) {
                 sw.WriteLine(i + "," + board[i].returnScore() + "," + board[i].returnName() + "," + board[i].returnPointer());
                 //writes out the index, the score, the name, and then the pointer
             }
@@ -447,8 +479,7 @@ namespace Flappy_Birb
         }
         //saves the leader board to a text file
 
-        public void loadLeaderBoard()
-        {
+        public void loadLeaderBoard() {
             StreamReader sr = new StreamReader(Application.StartupPath + "\\Board.txt");
             string line;
             string[] newVariables = new string[3];
@@ -456,8 +487,7 @@ namespace Flappy_Birb
             startPointer = Convert.ToInt16(sr.ReadLine());
             //gets the start pointer
 
-            while ((line = sr.ReadLine()) != null)
-            {
+            while ((line = sr.ReadLine()) != null) {
                 newVariables = line.Split(new char[] { ',' });
                 //splits each line from the text document and puts it into an array value
 
@@ -470,8 +500,7 @@ namespace Flappy_Birb
         }
         //loads the leader board from a text file into the program
 
-        public void makeHarder()
-        {
+        public void makeHarder() {
             if (passesToSpeedUp > difficultyIncreaseFrequency)
             //if the game is set to speed up
             {
@@ -493,6 +522,7 @@ namespace Flappy_Birb
             passesToSpeedUp++;
             //incremeant the counter for speeding up
         }
+
         //makes the game harder
     }
 }

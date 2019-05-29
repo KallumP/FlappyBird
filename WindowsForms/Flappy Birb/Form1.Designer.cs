@@ -44,6 +44,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.name_tBox = new System.Windows.Forms.TextBox();
             this.yourName_lbl = new System.Windows.Forms.Label();
+            this.GLControl_canvas = new OpenTK.GLControl();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,6 +56,7 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox1.Enabled = false;
             this.pictureBox1.Location = new System.Drawing.Point(15, 7);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(364, 545);
@@ -202,11 +204,24 @@
             this.yourName_lbl.TabIndex = 20;
             this.yourName_lbl.Text = "Your name:";
             // 
+            // GLControl_canvas
+            // 
+            this.GLControl_canvas.BackColor = System.Drawing.Color.Black;
+            this.GLControl_canvas.Enabled = false;
+            this.GLControl_canvas.Location = new System.Drawing.Point(653, 7);
+            this.GLControl_canvas.Name = "GLControl_canvas";
+            this.GLControl_canvas.Size = new System.Drawing.Size(367, 545);
+            this.GLControl_canvas.TabIndex = 21;
+            this.GLControl_canvas.VSync = false;
+            this.GLControl_canvas.Load += new System.EventHandler(this.GLControl_canvas_Load);
+            this.GLControl_canvas.Paint += new System.Windows.Forms.PaintEventHandler(this.GLControl_canvas_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(651, 561);
+            this.ClientSize = new System.Drawing.Size(1032, 561);
+            this.Controls.Add(this.GLControl_canvas);
             this.Controls.Add(this.yourName_lbl);
             this.Controls.Add(this.name_tBox);
             this.Controls.Add(this.label1);
@@ -250,6 +265,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox name_tBox;
         private System.Windows.Forms.Label yourName_lbl;
+        private OpenTK.GLControl GLControl_canvas;
     }
 }
 

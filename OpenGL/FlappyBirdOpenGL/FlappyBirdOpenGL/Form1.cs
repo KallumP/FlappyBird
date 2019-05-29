@@ -17,8 +17,31 @@ namespace FlappyBirdOpenGL {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Lets the user start the game
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void start_btn_Click(object sender, EventArgs e) {
-            game = new Game();
+
+            //hides the menu
+            Hide();
+
+            //opens up the game window
+            game = new Game(this);
+        }
+
+        /// <summary>
+        /// Ends the game and ouputs the score
+        /// </summary>
+        /// <param name="score"></param>
+        public void EndGame(int score) {
+
+            //reopens the menu
+            Show();
+
+            //ouputs the score
+            tempScore_lbl.Text = score.ToString();
         }
     }
 }

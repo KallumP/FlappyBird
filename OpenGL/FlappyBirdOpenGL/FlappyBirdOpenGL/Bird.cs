@@ -5,11 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
+using OpenTK.Graphics.OpenGL;
+using System.Windows.Forms.Design;
 
 namespace FlappyBirdOpenGL {
     class Bird {
 
+        /// <summary>
+        /// An instance to the Game class
+        /// </summary>
         Game parent;
+        public Color color;
+        public int score;
 
         /// <summary>
         /// the gravity to be applied to the bird (px per second per second)
@@ -19,22 +26,27 @@ namespace FlappyBirdOpenGL {
         /// <summary>
         /// the accelaration provided by a flap to the bird(px per second per second)
         /// </summary>
-        float flapAcc = -7;
+        float flapVel = -7.5f;
 
-        float acc = 0;
+        /// <summary>
+        /// The overal velocity of the bird
+        /// </summary>
         float vel = 0;
-        float termVel = 20;
+
+        /// <summary>
+        /// The fastest speed the bird should reach
+        /// </summary>
+        float termVel;
 
         /// <summary>
         /// The coordinates of the player
         /// </summary>
         public PointF coords;
 
-
         /// <summary>
         /// The width/radisu of the player
         /// </summary>
-        public int radius { get; } = 20;
+        public int radius = 20;
 
         /// <summary>
         /// Constructor
@@ -45,13 +57,14 @@ namespace FlappyBirdOpenGL {
             coords = startingCoords;
             parent = _parent;
             termVel = 10 / (float)parent.window.UpdateFrequency;
+            color = Color.Yellow;
         }
 
         /// <summary>
         /// The method that updates the bird every tick
         /// </summary>
         public void Tick() {
-            acc += gravity * (float)parent.window.UpdateFrequency;
+            vel += gravity * (float)parent.window.UpdateFrequency;
             CheckForBounds();
             Move();
         }
@@ -60,32 +73,26 @@ namespace FlappyBirdOpenGL {
         /// Makes the bird flap up
         /// </summary>
         public void Flap() {
-            acc = flapAcc;
+            vel = flapVel;
         }
 
         /// <summary>
         /// A check to see if the ceiling or ground was hit
         /// </summary>
         void CheckForBounds() {
-            if (coords.Y + radius > parent.window.Height) {
 
-                coords.Y = parent.window.Height - 1;
+            //stops the bird from going outside the window
+            if (coords.Y + radius > parent.window.Height)
+                coords.Y = parent.window.Height - radius;
 
-
-
-            } else if (coords.Y - radius < 0) {
-
-
-            }
+            else if (coords.Y - radius < 0)
+                coords.Y = radius;
         }
 
         /// <summary>
         /// Calculates the velocity, and then moves the bird
         /// </summary>
         void Move() {
-
-            vel = 0;
-            vel += acc;
 
             if (vel > termVel)
                 vel = termVel;
@@ -94,6 +101,26 @@ namespace FlappyBirdOpenGL {
 
 
             coords.Y += vel;
+        }
+
+        /// <summary>
+        /// Draws out the player
+        /// </summary>
+        public void Draw() {
+
+            GL.Begin(BeginMode.Polygon);
+
+            //loops through and draws out a cirle to represent the player
+            for (int i = 0; i <= 360; i += 20) {
+
+                double x = coords.X + Math.Sin(i / 57.2) * radius;
+                double y = coords.Y + Math.Cos(i / 57.2) * radius;
+
+                GL.Color3(color);
+                GL.Vertex2(x, y);
+            }
+
+            GL.End();
         }
     }
 }

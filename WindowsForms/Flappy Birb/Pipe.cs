@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Flappy_Birb
 {
@@ -14,8 +15,8 @@ namespace Flappy_Birb
 
         public Pipe(int xLocation, int yLocation)
         {
-            coords.x = xLocation;
-            coords.y = yLocation;
+            coords.X = xLocation;
+            coords.Y = yLocation;
             pipeScore = 1;
         }
         //constructor
@@ -23,7 +24,7 @@ namespace Flappy_Birb
         public void movePipe(int speed)
         {
             for (int i = 0; i< speed; i++)
-            coords.x --;
+            coords.X --;
 
 
             //coords.x -= speed;
@@ -45,7 +46,7 @@ namespace Flappy_Birb
 
         public bool offScreen(int width)
         {
-            if ((coords.x + width) <= 0)
+            if ((coords.X + width) <= 0)
                 return true;
             else
                 return false;
@@ -54,7 +55,7 @@ namespace Flappy_Birb
 
         public int returnXLocation()
         {
-            return coords.x;
+            return coords.X;
         }
     }
 }

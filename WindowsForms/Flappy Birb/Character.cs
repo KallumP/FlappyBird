@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace Flappy_Birb
 {
     class Character
     {
-        public Point size = new Point(30, 25);
+        public Point size = new Point(30, 30);
         public Point coords;
+        public int radius = 15;
         int terminalVelocity = 30;
         public int flapVelocity = -9;
         public int birdVelocity;
@@ -59,18 +61,18 @@ namespace Flappy_Birb
 
         public void move()
         { 
-            coords.y += birdVelocity;
+            coords.Y += birdVelocity;
         }
         //applies the velocity to the bird
 
         public void terrainCollision(int height)
         {
-            if (coords.y >= height - size.y)
-                coords.y = height - size.y;
+            if (coords.Y >= height - size.Y)
+                coords.Y = height - size.Y;
             //stops the bird from going below the screen
 
-            if (coords.y <= 0)
-                coords.y = 0;
+            if (coords.Y <= 0)
+                coords.Y = 0;
             //stops the bird from going above the ceiling
         }
         //does the collision maths for the ceiling and floor
