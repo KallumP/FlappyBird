@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Flappy Birb.exe" size="62376">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Flappy Birb.exe" size="60840">
       <assemblyIdentity name="Flappy Birb" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>BSThrANXAkpIVAuM15jJ1PMSo5tv6CVKA0mGpt13NkE=</dsig:DigestValue>
+        <dsig:DigestValue>4UEc43vO4GDDWvkOrvWtPPChlq0PlVZOS4vgA2wVNCQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

@@ -59,8 +59,6 @@ namespace Flappy_Birb {
                 pictureBox1.Invalidate();
                 //causes the game screen to refresh
 
-                GLControl_canvas.Invalidate();
-
                 pipeCollsion();
                 //after everything is done, it will check for a collision
 
@@ -137,58 +135,7 @@ namespace Flappy_Birb {
         }
         //draws the game
 
-        private void GLControl_canvas_Paint(object sender, PaintEventArgs e) {
-
-            GL.Clear(ClearBufferMask.ColorBufferBit);
-            GL.Clear(ClearBufferMask.DepthBufferBit);
-
-            GL.Viewport(0, 0, GLControl_canvas.Width, GLControl_canvas.Height);
-            GL.MatrixMode(MatrixMode.Projection);
-            GL.LoadIdentity();
-            GL.Ortho(0, GLControl_canvas.Width, GLControl_canvas.Height, 0, -1, 1);
-            GL.MatrixMode(MatrixMode.Modelview);
-
-            //Basic Setup for viewing
-          
-
-            if (glControlLoaded != false) {
-                //makes sure that the glcontrol is there before drawing to it
-
-                GL.Begin(BeginMode.Polygon);
-
-                //loops through and draws out a cirle to represent the player
-                for (int i = 0; i <= 360; i += 20) {
-
-                    double X = playerOne.radius + playerOne.coords.X + Math.Sin(i / 57.2) * playerOne.radius;
-                    double Y = playerOne.radius + playerOne.coords.Y + Math.Cos(i / 57.2) * playerOne.radius;
-
-                    GL.Color3(Color.Yellow);
-                    GL.Vertex2(X, Y);
-                }
-
-                GL.End();
-
-                foreach (Pipe p in pipes) {
-                    GL.Begin(BeginMode.Polygon);
-                    GL.Color3(Color.Green);
-                    GL.Vertex2(p.coords.X, 0);
-                    GL.Vertex2(p.coords.X + pipeWidth, 0);
-                    GL.Vertex2(p.coords.X + pipeWidth, p.coords.Y);
-                    GL.Vertex2(p.coords.X, p.coords.Y);
-                    GL.End();
-
-                    GL.Begin(BeginMode.Polygon);
-                    GL.Vertex2(p.coords.X, p.coords.Y + pipeGap);
-                    GL.Vertex2(p.coords.X + pipeWidth, p.coords.Y + pipeGap);
-                    GL.Vertex2(p.coords.X + pipeWidth, GLControl_canvas.Height);
-                    GL.Vertex2(p.coords.X, GLControl_canvas.Height);
-                    GL.End();
-                }
-
-                GLControl_canvas.SwapBuffers();
-            }
-        }
-        //draws the game using opengl
+        
 
         public void checkSpawnPipe() {
             if (ticksToSpawnPipe > spawnRate) {
@@ -340,7 +287,6 @@ namespace Flappy_Birb {
         private void restart_btn_Click(object sender, EventArgs e) {
             gameStart();
             pictureBox1.Invalidate();
-            GLControl_canvas.Invalidate();
         }
         //resets the game
 

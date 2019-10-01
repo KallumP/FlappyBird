@@ -242,3 +242,25 @@ D:\Documents\Code\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.appl
 D:\Documents\Code\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.csproj.CopyComplete
 D:\Documents\Code\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.exe
 D:\Documents\Code\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.pdb
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\Flappy Birb.exe.config
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\Flappy Birb.exe.manifest
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\Flappy Birb.application
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\Flappy Birb.exe
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\Flappy Birb.pdb
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\OpenTK.dll
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\OpenTK.GLControl.dll
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\OpenTK.pdb
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\OpenTK.xml
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\OpenTK.GLControl.pdb
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\bin\Debug\OpenTK.GLControl.xml
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.csprojAssemblyReference.cache
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy_Birb.Form1.resources
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy_Birb.Properties.Resources.resources
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.csproj.GenerateResource.cache
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.csproj.CoreCompileInputs.cache
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.TrustInfo.xml
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.exe.manifest
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.application
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.csproj.CopyComplete
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.exe
+D:\Documents\Dropbox\Coding\FlappyBird\WindowsForms\Flappy Birb\obj\Debug\Flappy Birb.pdb
